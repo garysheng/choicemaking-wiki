@@ -69,7 +69,7 @@ Decide how the deciding goes.
 
 1. **Stakes:** what does it cost if you are wrong, and can you undo it? Bezos asks for both: [consequential and irreversible](https://www.sec.gov/Archives/edgar/data/1018724/000119312516530910/d168744dex991.htm).
 2. **Scale:** one, a few, or thousands. A backlog is one type at large scale.
-3. **Ground:** what makes an answer good. Truth, Forecast, Rule, Value or Taste. One moment can have several. This builds on older work: Herbert Simon split facts from values, and McGrath split tasks with correct answers from tasks with none. We read those through secondary sources. For a Christian, calling is held within Value, and the faith page says more.
+3. **Ground:** what makes an answer good. Truth, Forecast, Rule, Value or Taste. One moment can have several. This builds on older work: Herbert Simon split facts from values, and McGrath split tasks with correct answers from tasks with none. We read those through secondary sources.
 4. **Medium:** how you judge it: by looking, reading, listening or trying it.
 5. **Duration:** this one time, or from now on. [ACP](https://agentclientprotocol.com/protocol/tool-calls) already separates these.
 6. **Parties:** you alone, or several people together, like a couple or a doctor and a patient.
