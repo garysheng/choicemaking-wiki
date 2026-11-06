@@ -27,3 +27,4 @@ static/llms-full.txt
 # Agent worktrees made inside the repo (EnterWorktree, the skill-page remedy). Left
 # untracked, each is one `git add -A` away from an embedded repo committed to main.
 .claude/worktrees/
+.env*
