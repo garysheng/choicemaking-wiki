@@ -38,6 +38,22 @@ It fails when you must describe the location in a chat message.
 1. **Speak first.** Dictation is the default way to respond to a document.
 2. **Comments stay tied to the words.** A comment sits on the exact line it is about, so the AI knows what to change.
 
+## Calls inside a document
+
+A document under review often needs a decision as well as edits. A comment is the wrong tool for that. It makes the person write out a choice, and it leaves the AI to work out what they meant.
+
+So put each decision in the document as a call, at the place it comes up:
+
+- [ ] Ask one question.
+- [ ] Give at least two options, with a reason beside each.
+- [ ] Put the recommended option first, and say that it is the recommendation.
+- [ ] Let one tap answer it, and let a second tap change it.
+- [ ] Keep a way to answer outside the options.
+- [ ] Show all the calls at the end of the document, with each answer.
+- [ ] Say what Approve will take. A call with no recommendation has no default, so Approve waits.
+
+Each call is a [Pick one](/patterns/pick-one) inside the Mark up. Do not collect plain questions at the end of a document: they sit far from their reasons, and they leave no record.
+
 ## The same choice in a chat app
 
 The first screen is this choice in a plain chat app. The second is the same choice with its own design.
