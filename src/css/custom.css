@@ -118,3 +118,11 @@
 [data-theme='dark'] .footer {
   color: #888;
 }
+
+/* Phone mockups on the Patterns pages: live on a wide screen, a picture that links to it on a phone. */
+.mock-live{display:block;width:390px;height:844px;border:1px solid var(--ifm-color-emphasis-300);border-radius:12px;margin:0 auto 12px;background:#fff}
+.mock-pic{display:none;margin:0 auto 12px;max-width:320px}
+.mock-pic img{display:block;width:100%;border-radius:12px;border:1px solid var(--ifm-color-emphasis-300)}
+.mock-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:640px}
+.mock-pair img{display:block;width:100%;border-radius:10px;border:1px solid var(--ifm-color-emphasis-300)}
+@media (max-width:768px){.mock-live{display:none}.mock-pic{display:block}}

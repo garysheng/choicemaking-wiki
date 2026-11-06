@@ -1,0 +1,12 @@
+{
+  "asset": "static/mockups/img/set-what-matters.webp",
+  "generator": "scripts/render-mockups.mjs",
+  "generatedAt": "2026-11-06T03:53:52.626Z",
+  "params": {
+    "source": "static/mockups/set-what-matters.html",
+    "width": 390,
+    "height": 844,
+    "scale": 2,
+    "quality": 80
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "asset": "static/mockups/img/say-what-you-want.webp",
+  "generator": "scripts/render-mockups.mjs",
+  "generatedAt": "2026-11-06T03:53:51.295Z",
+  "params": {
+    "source": "static/mockups/say-what-you-want.html",
+    "width": 390,
+    "height": 844,
+    "scale": 2,
+    "quality": 80
+  }
+}

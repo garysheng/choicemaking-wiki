@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>Set a rule</title><style>:root{--paper:#f6f1e7;--paper2:#ece5d6;--page:#fbf8f1;--ink:#1a1a1a;--ink2:#555048;--ink3:#8a8377;--rule:rgba(26,26,26,.16);--red:#c13d1c;--mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;--sans:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:#e4dccb;display:flex;align-items:center;justify-content:center;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;overflow:auto}
+.phone{width:390px;height:844px;flex:none;background:var(--paper);position:relative;display:flex;flex-direction:column;overflow:hidden;user-select:none;-webkit-user-select:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.sb{height:44px;flex:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 6px;font:600 13px var(--sans)}
+.sb i{width:22px;height:11px;border:1px solid currentColor;border-radius:3px;position:relative;opacity:.8}
+.sb i:before{content:"";position:absolute;inset:1.5px 5px 1.5px 1.5px;background:currentColor;border-radius:1px}
+.where{flex:none;display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 20px 9px;font:500 11px/1.3 var(--mono);color:var(--ink2);border-bottom:1px solid var(--ink)}
+.where b{font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.where span{text-align:right}
+main{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
+h1{font:400 27px/1.14 var(--serif);letter-spacing:-.01em}
+.mono{font-family:var(--mono)}
+.dock{flex:none;padding:0 16px;border-top:1px solid var(--rule);background:var(--paper)}
+.rec{display:flex;gap:9px;align-items:baseline;padding:7px 4px 6px;font:12.5px/1.3 var(--sans);color:var(--ink2);min-height:32px}
+.rec b{font:600 10.5px var(--mono);text-transform:uppercase;color:var(--ink);letter-spacing:.03em;flex:none}
+.rec.flash span{animation:fl .9s ease-out}
+@keyframes fl{0%{background:rgba(193,61,28,.22)}100%{background:transparent}}
+.other{display:flex;align-items:center;height:46px;border:1px solid var(--ink);border-radius:22px;padding-left:16px;background:var(--page)}
+.other input{flex:1;min-width:0;border:0;background:none;outline:0;font:15px var(--sans);color:var(--ink);height:44px}
+.other input::placeholder{color:var(--ink2)}
+.mic{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center}
+.mic.on{color:var(--red)}
+.home{flex:none;height:22px;position:relative}
+.home:after{content:"";position:absolute;left:50%;bottom:7px;width:128px;height:4.5px;border-radius:3px;margin-left:-64px;background:var(--ink)}
+.dark{--paper:#151412;--ink:#f3eee3;--ink2:#a79f91;--ink3:#7a7367;--rule:rgba(243,238,227,.2);--page:#201e1a}
+
+.rule{padding:16px 20px 14px;font:400 33px/1.22 var(--serif);letter-spacing:-.015em}
+.rule u{text-decoration:none;color:var(--red);border-bottom:2px solid var(--red)}
+.pick{padding:0 20px;display:flex;flex-direction:column;gap:6px}
+.pick>div{display:flex;gap:6px}
+.pick button{flex:1;height:44px;border:1px solid var(--ink);font:500 13.5px var(--sans);white-space:nowrap;padding:0 2px}
+.pick button.on{background:var(--ink);color:var(--paper)}
+.past{flex:1;min-height:0;margin-top:12px;border-top:1px solid var(--ink);background:var(--page);padding:9px 20px 0;display:flex;flex-direction:column}
+.past h2{font:600 11px var(--mono);text-transform:uppercase}
+.past .sum{font:400 21px/1.2 var(--serif);margin:3px 0 2px}
+.st{flex:none;height:92px;width:350px;display:block}
+.ex{flex:1;min-height:0;overflow:hidden}
+.ex div{display:flex;justify-content:space-between;gap:10px;font:13.5px/1.3 var(--sans);padding:5px 0;border-top:1px solid var(--rule)}
+.ex b{font:500 11.5px/1.5 var(--mono);white-space:nowrap}
+.ex b.h{color:var(--red)}
+.act{flex:none;padding:6px 0 10px}
+.act button{height:46px;width:100%;background:var(--ink);color:var(--paper);border-radius:23px;font:600 15px var(--sans)}
+</style></head><body class=""><div class="phone" id="phone"><div class="sb"><span>9:41</span><i></i></div><header class="where"><b>Set a rule</b><span>Agent spending · Applies to all tasks</span></header><main>
+  <div class="rule">If the agent wants to spend over <u id="a"></u>, <u id="d"></u>. This holds <u id="w"></u>.</div>
+  <div class="pick">
+    <div id="pa"></div>
+    <div id="pd"></div>
+    <div id="pw"></div>
+  </div>
+  <div class="past">
+    <h2>Last 30 days, with this rule</h2>
+    <p class="sum" id="s"></p>
+    <svg class="st" id="st" viewBox="0 0 350 92"></svg>
+    <div class="ex" id="e"></div>
+    <div class="act"><button id="go">Set this rule</button></div>
+  </div>
+</main><footer class="dock"><div class="rec" id="rec"><b>Record</b><span>This rule is not active yet.</span></div><form class="other" id="other"><input aria-label="Answer another way" placeholder="Add an exception"><button type="button" class="mic" aria-label="Speak your answer"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="7" y="2" width="6" height="10.5" rx="3"/><path d="M3.8 9.5a6.2 6.2 0 0 0 12.4 0M10 15.8V18"/></svg></button></form></footer><div class="home"></div></div><script>const DOCK_SAY="Allow printing costs up to one thousand dollars.";const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+function rec(t){const b=$('#rec'),e=$('#rec span');if(!e)return;e.textContent=t;b.classList.remove('flash');void b.offsetWidth;b.classList.add('flash')}
+function onDrag(el,h){el.addEventListener('pointerdown',ev=>{ev.preventDefault();el.setPointerCapture(ev.pointerId);h.start&&h.start(ev);const m=e=>h.move&&h.move(e),u=e=>{el.removeEventListener('pointermove',m);el.removeEventListener('pointerup',u);el.removeEventListener('pointercancel',u);h.end&&h.end(e)};el.addEventListener('pointermove',m);el.addEventListener('pointerup',u);el.addEventListener('pointercancel',u)})}
+(function(){const p=$('#phone');const fit=()=>{p.style.zoom=innerWidth<390?innerWidth/390:''};fit();addEventListener('resize',fit);const f=$('#other');if(!f)return;const i=$('input',f),m=$('.mic',f);f.addEventListener('submit',e=>{e.preventDefault();if(i.value.trim()){rec('Your own words: '+i.value.trim());i.value=''}});m.addEventListener('click',()=>{m.classList.add('on');const ph=i.placeholder;i.placeholder='Listening';setTimeout(()=>{m.classList.remove('on');i.placeholder=ph;i.value=DOCK_SAY},1200)})})();
+
+const A=[100,500,1000,5000],Dn=['ask me first','stop the task','tell me after'],Wn=['from now on','this month','this task only'];
+let a=500,d=0,w=0;
+const R=x=>{let s=x*17+3;return Array.from({length:66},(_,i)=>{s=(s*7919+i*31)%10007;return Math.round(12*Math.exp((s/10007)**1.8*5.9))})};const pts=R(3).concat([1200,640,2300]);
+const ex=[['Trade show booth',1200],['Printing, spring catalog',640],['Stock photos',48],['Web hosting',89]];
+const opt=(id,arr,get,set,lab)=>{$(id).innerHTML=arr.map((v,i)=>`<button>${lab(v)}</button>`).join('');$$('button',$(id)).forEach((b,i)=>b.onclick=()=>{set(i);draw()})};
+opt('#pa',A,0,i=>a=A[i],v=>'$'+v.toLocaleString());opt('#pd',Dn,0,i=>d=i,v=>v[0].toUpperCase()+v.slice(1));opt('#pw',Wn,0,i=>w=i,v=>v[0].toUpperCase()+v.slice(1));
+function draw(){$('#a').textContent='$'+a.toLocaleString();$('#d').textContent=Dn[d];$('#w').textContent=Wn[w];
+$$('#pa button').forEach((b,i)=>b.classList.toggle('on',A[i]==a));$$('#pd button').forEach((b,i)=>b.classList.toggle('on',i==d));$$('#pw button').forEach((b,i)=>b.classList.toggle('on',i==w));
+const hit=pts.filter(p=>p>a).length;$('#s').textContent=`It would catch ${hit} of ${pts.length} payments.`;
+const lx=v=>10+Math.log10(v/10)/Math.log10(600)*330;let h='';const bins={};pts.forEach(p=>{const b=Math.round(lx(p)/10)*10;bins[b]=(bins[b]||0)+1;const c=p>a?'#c13d1c':'#1a1a1a';h+=`<circle cx="${b}" cy="${66-(bins[b]-1)*9}" r="3.8" fill="${c}"/>`});
+h+=`<line x1="0" x2="350" y1="72" y2="72" stroke="#1a1a1a"/><line x1="${lx(a)}" x2="${lx(a)}" y1="0" y2="74" stroke="#c13d1c" stroke-width="1.5" stroke-dasharray="3 3"/>`;[[10,'$10'],[100,'$100'],[1000,'$1,000']].forEach(([v,t])=>h+=`<text x="${lx(v)}" y="86" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#555048">${t}</text>`);$('#st').innerHTML=h;
+const lb=['ASKS YOU','STOPS','TELLS YOU'][d];$('#e').innerHTML=ex.map(([n,v])=>`<div><span>${n}, $${v.toLocaleString()}</span><b class="${v>a?'h':''}">${v>a?lb:'GOES AHEAD'}</b></div>`).join('')}
+$('#go').onclick=()=>{rec(`You set a rule: over $${a.toLocaleString()}, ${Dn[d]}, ${Wn[w]}.`);$('#go').textContent='Rule set. Tap to change'};draw();
+</script></body></html>

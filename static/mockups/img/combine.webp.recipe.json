@@ -1,0 +1,12 @@
+{
+  "asset": "static/mockups/img/combine.webp",
+  "generator": "scripts/render-mockups.mjs",
+  "generatedAt": "2026-11-06T03:53:46.719Z",
+  "params": {
+    "source": "static/mockups/combine.html",
+    "width": 390,
+    "height": 844,
+    "scale": 2,
+    "quality": 80
+  }
+}

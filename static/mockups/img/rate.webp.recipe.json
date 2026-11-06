@@ -1,0 +1,12 @@
+{
+  "asset": "static/mockups/img/rate.webp",
+  "generator": "scripts/render-mockups.mjs",
+  "generatedAt": "2026-11-06T03:53:50.842Z",
+  "params": {
+    "source": "static/mockups/rate.html",
+    "width": 390,
+    "height": 844,
+    "scale": 2,
+    "quality": 80
+  }
+}

@@ -1,6 +1,66 @@
 {
   "changeEvents": [
     {
+      "id": "philosophy/free-and-anointed-will@9517983f0b8503ce6398b3b269ca84a03043503e",
+      "type": "new",
+      "date": "2026-11-05T22:25:40-05:00",
+      "docKey": "philosophy/free-and-anointed-will",
+      "routePath": "/philosophy/free-and-anointed-will",
+      "section": "philosophy",
+      "title": "Free and anointed will",
+      "description": "God gave people the power to choose. AI assistance does not take that gift away, but a person can give it away."
+    },
+    {
+      "id": "philosophy/passive-consent@9517983f0b8503ce6398b3b269ca84a03043503e",
+      "type": "new",
+      "date": "2026-11-05T22:25:40-05:00",
+      "docKey": "philosophy/passive-consent",
+      "routePath": "/philosophy/passive-consent",
+      "section": "philosophy",
+      "title": "Passive consent",
+      "description": "Passive consent is accepting an AI decision because reviewing it costs too much."
+    },
+    {
+      "id": "philosophy/slop-is-the-mean@9517983f0b8503ce6398b3b269ca84a03043503e",
+      "type": "new",
+      "date": "2026-11-05T22:25:40-05:00",
+      "docKey": "philosophy/slop-is-the-mean",
+      "routePath": "/philosophy/slop-is-the-mean",
+      "section": "philosophy",
+      "title": "Slop is the mean",
+      "description": "Slop is AI output that falls to the average, because nobody pushed it anywhere else."
+    },
+    {
+      "id": "philosophy/the-medium-is-the-message@9517983f0b8503ce6398b3b269ca84a03043503e",
+      "type": "new",
+      "date": "2026-11-05T22:25:40-05:00",
+      "docKey": "philosophy/the-medium-is-the-message",
+      "routePath": "/philosophy/the-medium-is-the-message",
+      "section": "philosophy",
+      "title": "The medium is the message",
+      "description": "The way an AI product lets you choose shapes what you think you can choose."
+    },
+    {
+      "id": "philosophy/what-a-real-choice-is@9517983f0b8503ce6398b3b269ca84a03043503e",
+      "type": "new",
+      "date": "2026-11-05T22:25:40-05:00",
+      "docKey": "philosophy/what-a-real-choice-is",
+      "routePath": "/philosophy/what-a-real-choice-is",
+      "section": "philosophy",
+      "title": "What a real choice is",
+      "description": "A real choice is one where you saw the alternatives, understood them, and decided for yourself."
+    },
+    {
+      "id": "philosophy/what-co-made-means@9517983f0b8503ce6398b3b269ca84a03043503e",
+      "type": "new",
+      "date": "2026-11-05T22:25:40-05:00",
+      "docKey": "philosophy/what-co-made-means",
+      "routePath": "/philosophy/what-co-made-means",
+      "section": "philosophy",
+      "title": "What co-made means",
+      "description": "A work is co-made when AI did much of the labor and people made the choices that matter."
+    },
+    {
       "id": "reference/graphic-style@5c541c5e3f692abb4276b76381f7e41570457977",
       "type": "updated",
       "date": "2026-11-05T21:36:04-05:00",
@@ -72,11 +132,39 @@
     }
   ],
   "pageDates": {
-    "reference/graphic-style": {
-      "updated": "2026-11-05T21:36:04-05:00",
-      "created": "2026-11-05T20:34:32-06:00"
+    "philosophy/free-and-anointed-will": {
+      "updated": "2026-11-05T22:25:40-05:00",
+      "created": "2026-11-05T22:25:40-05:00"
+    },
+    "philosophy/index": {
+      "updated": "2026-11-05T22:25:40-05:00",
+      "created": "2026-11-05T22:25:40-05:00"
+    },
+    "philosophy/passive-consent": {
+      "updated": "2026-11-05T22:25:40-05:00",
+      "created": "2026-11-05T22:25:40-05:00"
+    },
+    "philosophy/slop-is-the-mean": {
+      "updated": "2026-11-05T22:25:40-05:00",
+      "created": "2026-11-05T22:25:40-05:00"
+    },
+    "philosophy/the-medium-is-the-message": {
+      "updated": "2026-11-05T22:25:40-05:00",
+      "created": "2026-11-05T22:25:40-05:00"
+    },
+    "philosophy/what-a-real-choice-is": {
+      "updated": "2026-11-05T22:25:40-05:00",
+      "created": "2026-11-05T22:25:40-05:00"
+    },
+    "philosophy/what-co-made-means": {
+      "updated": "2026-11-05T22:25:40-05:00",
+      "created": "2026-11-05T22:25:40-05:00"
     },
     "start-here/index": {
+      "updated": "2026-11-05T22:25:40-05:00",
+      "created": "2026-11-05T20:34:32-06:00"
+    },
+    "reference/graphic-style": {
       "updated": "2026-11-05T21:36:04-05:00",
       "created": "2026-11-05T20:34:32-06:00"
     },

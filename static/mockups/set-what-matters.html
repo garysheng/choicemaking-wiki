@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>Set what matters</title><style>:root{--paper:#f6f1e7;--paper2:#ece5d6;--page:#fbf8f1;--ink:#1a1a1a;--ink2:#555048;--ink3:#8a8377;--rule:rgba(26,26,26,.16);--red:#c13d1c;--mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;--sans:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:#e4dccb;display:flex;align-items:center;justify-content:center;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;overflow:auto}
+.phone{width:390px;height:844px;flex:none;background:var(--paper);position:relative;display:flex;flex-direction:column;overflow:hidden;user-select:none;-webkit-user-select:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.sb{height:44px;flex:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 6px;font:600 13px var(--sans)}
+.sb i{width:22px;height:11px;border:1px solid currentColor;border-radius:3px;position:relative;opacity:.8}
+.sb i:before{content:"";position:absolute;inset:1.5px 5px 1.5px 1.5px;background:currentColor;border-radius:1px}
+.where{flex:none;display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 20px 9px;font:500 11px/1.3 var(--mono);color:var(--ink2);border-bottom:1px solid var(--ink)}
+.where b{font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.where span{text-align:right}
+main{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
+h1{font:400 27px/1.14 var(--serif);letter-spacing:-.01em}
+.mono{font-family:var(--mono)}
+.dock{flex:none;padding:0 16px;border-top:1px solid var(--rule);background:var(--paper)}
+.rec{display:flex;gap:9px;align-items:baseline;padding:7px 4px 6px;font:12.5px/1.3 var(--sans);color:var(--ink2);min-height:32px}
+.rec b{font:600 10.5px var(--mono);text-transform:uppercase;color:var(--ink);letter-spacing:.03em;flex:none}
+.rec.flash span{animation:fl .9s ease-out}
+@keyframes fl{0%{background:rgba(193,61,28,.22)}100%{background:transparent}}
+.other{display:flex;align-items:center;height:46px;border:1px solid var(--ink);border-radius:22px;padding-left:16px;background:var(--page)}
+.other input{flex:1;min-width:0;border:0;background:none;outline:0;font:15px var(--sans);color:var(--ink);height:44px}
+.other input::placeholder{color:var(--ink2)}
+.mic{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center}
+.mic.on{color:var(--red)}
+.home{flex:none;height:22px;position:relative}
+.home:after{content:"";position:absolute;left:50%;bottom:7px;width:128px;height:4.5px;border-radius:3px;margin-left:-64px;background:var(--ink)}
+.dark{--paper:#151412;--ink:#f3eee3;--ink2:#a79f91;--ink3:#7a7367;--rule:rgba(243,238,227,.2);--page:#201e1a}
+
+.ask{padding:12px 20px 0}
+.pack{position:relative;height:344px;flex:none;margin:0 10px}
+.b{position:absolute;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:all .35s cubic-bezier(.3,.8,.3,1);border:1px solid var(--ink);padding:6px;line-height:1.12}
+.b span{font:400 var(--fs,15px)/1.12 var(--serif)}
+.b em{font:500 11px var(--mono);font-style:normal;margin-top:3px}
+.b.big{background:var(--ink);color:var(--paper)}
+.b.sel{outline:2px solid var(--red);outline-offset:2px}
+.tune{flex:none;display:flex;align-items:center;gap:8px;padding:0 20px 8px}
+.tune p{flex:1;font:13.5px/1.32 var(--sans);color:var(--ink)}
+.tune p b{display:block;font:600 11px var(--mono);text-transform:uppercase}
+.tune button{width:46px;height:46px;border:1px solid var(--ink);border-radius:50%;font:400 24px/1 var(--serif);flex:none}
+.lead{flex:1;min-height:0;border-top:1px solid var(--ink);padding:8px 20px 0;background:var(--page)}
+.lead h2{font:600 11px var(--mono);text-transform:uppercase;margin-bottom:4px}
+.c{display:grid;grid-template-columns:96px 1fr 34px;gap:8px;align-items:center;height:27px;font:14px var(--sans)}
+.c i{height:8px;background:var(--ink);display:block;transition:width .35s}
+.c:first-of-type i{background:var(--red)}
+.c b{font:500 12px var(--mono);text-align:right}
+</style></head><body class=""><div class="phone" id="phone"><div class="sb"><span>9:41</span><i></i></div><header class="where"><b>Set what matters</b><span>Lead nurse hire · Step 1</span></header><main>
+  <div class="ask"><h1>What matters most in this hire?</h1></div>
+  <div class="pack" id="p"></div>
+  <div class="tune"><p id="why"></p><button id="m" aria-label="Matters less">−</button><button id="u" aria-label="Matters more">+</button></div>
+  <div class="lead"><h2>What this does to the top three</h2><div id="l"></div></div>
+</main><footer class="dock"><div class="rec" id="rec"><b>Record</b><span>Set before you see scores. Your weights shape each one.</span></div><form class="other" id="other"><input aria-label="Answer another way" placeholder="Add something I missed"><button type="button" class="mic" aria-label="Speak your answer"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="7" y="2" width="6" height="10.5" rx="3"/><path d="M3.8 9.5a6.2 6.2 0 0 0 12.4 0M10 15.8V18"/></svg></button></form></footer><div class="home"></div></div><script>const DOCK_SAY="Add one more: Speaks Spanish.";const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+function rec(t){const b=$('#rec'),e=$('#rec span');if(!e)return;e.textContent=t;b.classList.remove('flash');void b.offsetWidth;b.classList.add('flash')}
+function onDrag(el,h){el.addEventListener('pointerdown',ev=>{ev.preventDefault();el.setPointerCapture(ev.pointerId);h.start&&h.start(ev);const m=e=>h.move&&h.move(e),u=e=>{el.removeEventListener('pointermove',m);el.removeEventListener('pointerup',u);el.removeEventListener('pointercancel',u);h.end&&h.end(e)};el.addEventListener('pointermove',m);el.addEventListener('pointerup',u);el.addEventListener('pointercancel',u)})}
+(function(){const p=$('#phone');const fit=()=>{p.style.zoom=innerWidth<390?innerWidth/390:''};fit();addEventListener('resize',fit);const f=$('#other');if(!f)return;const i=$('input',f),m=$('.mic',f);f.addEventListener('submit',e=>{e.preventDefault();if(i.value.trim()){rec('Your own words: '+i.value.trim());i.value=''}});m.addEventListener('click',()=>{m.classList.add('on');const ph=i.placeholder;i.placeholder='Listening';setTimeout(()=>{m.classList.remove('on');i.placeholder=ph;i.value=DOCK_SAY},1200)})})();
+
+const cr=[{n:'Calm in a crisis',w:34,x:120,y:110,why:'Night shifts have one senior nurse. No one can cover her.'},{n:'Teaches others',w:24,x:290,y:80,why:'Half the team joined this year.'},{n:'Years of practice',w:16,x:300,y:235,why:'Long practice helps. It does not prove skill.'},{n:'Good with records',w:14,x:60,y:285,why:'The state audit is in March.'},{n:'Team fit',w:12,x:180,y:285,why:'This word can hide bias. Keep it low.'}];
+const ppl=[['Ana Moreau',[9,6,8,6,7]],['Ben Osei',[6,9,5,8,8]],['Lena Pryce',[7,5,9,9,5]]];
+let sel=0;
+function r(w){return 15+Math.sqrt(w)*10.4}
+const clamp=()=>cr.forEach(c=>{const R=r(c.w);c.x=Math.max(R+2,Math.min(368-R,c.x));c.y=Math.max(R+4,Math.min(340-R,c.y))});
+function relax(){for(let t=0;t<200;t++){clamp();for(let i=0;i<cr.length;i++)for(let j=i+1;j<cr.length;j++){const a=cr[i],b=cr[j],dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,m=r(a.w)+r(b.w)+5-d;if(m>0){const ux=dx/d*m/2,uy=dy/d*m/2;a.x-=ux;a.y-=uy;b.x+=ux;b.y+=uy}}}clamp()}
+const P=$('#p');cr.forEach((c,i)=>{c.el=document.createElement('button');c.el.className='b';c.el.innerHTML=`<span>${c.n}</span><em></em>`;c.el.onclick=()=>{sel=i;draw()};P.append(c.el)});
+function draw(){relax();const tot=cr.reduce((s,c)=>s+c.w,0);cr.forEach((c,i)=>{const R=r(c.w),pc=Math.round(c.w/tot*100);c.el.style.cssText=`left:${c.x-R}px;top:${c.y-R}px;width:${2*R}px;height:${2*R}px;--fs:${Math.max(12.5,R/4.4)}px`;c.el.classList.toggle('big',c.w===Math.max(...cr.map(x=>x.w)));c.el.classList.toggle('sel',i===sel);$('em',c.el).textContent=pc+'%'});
+$('#why').innerHTML=`<b>${cr[sel].n}</b>${cr[sel].why}`;
+const sc=ppl.map(([n,s])=>[n,s.reduce((t,v,i)=>t+v*cr[i].w,0)/tot]).sort((a,b)=>b[1]-a[1]);
+$('#l').innerHTML=sc.map(([n,v])=>`<div class="c"><span>${n}</span><i style="width:${(v-4)/5*100}%"></i><b>${v.toFixed(1)}</b></div>`).join('')}
+function step(d){cr[sel].w=Math.max(6,Math.min(60,cr[sel].w+d));draw();rec(`You set ${cr[sel].n} to ${Math.round(cr[sel].w/cr.reduce((s,c)=>s+c.w,0)*100)}%. Top: ${$('#l .c span').textContent}.`)}
+$('#u').onclick=()=>step(5);$('#m').onclick=()=>step(-5);draw();
+</script></body></html>

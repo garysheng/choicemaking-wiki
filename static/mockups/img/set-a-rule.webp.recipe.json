@@ -1,0 +1,12 @@
+{
+  "asset": "static/mockups/img/set-a-rule.webp",
+  "generator": "scripts/render-mockups.mjs",
+  "generatedAt": "2026-11-06T03:53:51.746Z",
+  "params": {
+    "source": "static/mockups/set-a-rule.html",
+    "width": 390,
+    "height": 844,
+    "scale": 2,
+    "quality": 80
+  }
+}

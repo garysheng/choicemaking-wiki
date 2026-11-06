@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>Sort</title><style>:root{--paper:#f6f1e7;--paper2:#ece5d6;--page:#fbf8f1;--ink:#1a1a1a;--ink2:#555048;--ink3:#8a8377;--rule:rgba(26,26,26,.16);--red:#c13d1c;--mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;--sans:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:#e4dccb;display:flex;align-items:center;justify-content:center;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;overflow:auto}
+.phone{width:390px;height:844px;flex:none;background:var(--paper);position:relative;display:flex;flex-direction:column;overflow:hidden;user-select:none;-webkit-user-select:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.sb{height:44px;flex:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 26px 6px;font:600 13px var(--sans)}
+.sb i{width:22px;height:11px;border:1px solid currentColor;border-radius:3px;position:relative;opacity:.8}
+.sb i:before{content:"";position:absolute;inset:1.5px 5px 1.5px 1.5px;background:currentColor;border-radius:1px}
+.where{flex:none;display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 20px 9px;font:500 11px/1.3 var(--mono);color:var(--ink2);border-bottom:1px solid var(--ink)}
+.where b{font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.where span{text-align:right}
+main{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
+h1{font:400 27px/1.14 var(--serif);letter-spacing:-.01em}
+.mono{font-family:var(--mono)}
+.dock{flex:none;padding:0 16px;border-top:1px solid var(--rule);background:var(--paper)}
+.rec{display:flex;gap:9px;align-items:baseline;padding:7px 4px 6px;font:12.5px/1.3 var(--sans);color:var(--ink2);min-height:32px}
+.rec b{font:600 10.5px var(--mono);text-transform:uppercase;color:var(--ink);letter-spacing:.03em;flex:none}
+.rec.flash span{animation:fl .9s ease-out}
+@keyframes fl{0%{background:rgba(193,61,28,.22)}100%{background:transparent}}
+.other{display:flex;align-items:center;height:46px;border:1px solid var(--ink);border-radius:22px;padding-left:16px;background:var(--page)}
+.other input{flex:1;min-width:0;border:0;background:none;outline:0;font:15px var(--sans);color:var(--ink);height:44px}
+.other input::placeholder{color:var(--ink2)}
+.mic{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center}
+.mic.on{color:var(--red)}
+.home{flex:none;height:22px;position:relative}
+.home:after{content:"";position:absolute;left:50%;bottom:7px;width:128px;height:4.5px;border-radius:3px;margin-left:-64px;background:var(--ink)}
+.dark{--paper:#151412;--ink:#f3eee3;--ink2:#a79f91;--ink3:#7a7367;--rule:rgba(243,238,227,.2);--page:#201e1a}
+
+.ask{padding:12px 20px 0}
+.table{flex:1;min-height:0;position:relative;margin:6px 0 0}
+.slip{position:absolute;left:36px;right:36px;top:14px;height:296px;background:var(--page);border:1px solid var(--ink);padding:16px 18px;box-shadow:0 2px 0 rgba(26,26,26,.12);transition:transform .38s cubic-bezier(.4,.1,.4,1),opacity .38s}
+.slip.b1{transform:rotate(-2.6deg) translate(-3px,5px)}.slip.b2{transform:rotate(2.2deg) translate(4px,8px)}
+.slip p{font:400 26px/1.24 var(--serif)}
+.slip footer{position:absolute;left:18px;right:18px;bottom:12px;display:flex;justify-content:space-between;font:500 11px var(--mono);color:var(--ink2)}
+.slip footer b{color:var(--red);font-weight:600}
+.skip{position:absolute;left:0;right:0;top:282px;display:flex;justify-content:center;gap:22px}
+.skip button{height:44px;padding:0 10px;font:500 14px var(--sans)}
+.bins{flex:none;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);height:238px}
+.bin{display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;padding:0 8px 9px;border-right:1px solid var(--rule);position:relative;text-align:left}
+.bin:last-child{border-right:0}
+.bin.g{background:rgba(193,61,28,.08)}
+.bin .st{display:flex;flex-direction:column-reverse;gap:1px;margin-bottom:8px}
+.bin .st i{height:10px;background:var(--page);border:1px solid var(--ink);transform:rotate(calc(var(--r)*1deg))}
+.bin h3{font:400 17.5px/1.1 var(--serif)}
+.bin em{font:500 11.5px var(--mono);font-style:normal;color:var(--ink2);margin-top:3px}
+.bin.new{justify-content:center;text-align:center;align-items:center;color:var(--ink2)}
+.bin.new b{font:400 30px var(--serif)}
+.bin.new span{font:13px/1.2 var(--sans)}
+</style></head><body class=""><div class="phone" id="phone"><div class="sb"><span>9:41</span><i></i></div><header class="where"><b>Sort</b><span>Buyer notes · 12 of 34 sorted</span></header><main>
+  <div class="ask"><h1>Where does this note go?</h1></div>
+  <div class="table" id="t">
+    <div class="slip b2"></div><div class="slip b1"></div>
+    <div class="skip"><button id="sk">Skip this note</button><button id="sp">It fits two groups</button></div>
+  </div>
+  <div class="bins" id="b"></div>
+</main><footer class="dock"><div class="rec" id="rec"><b>Record</b><span>You sorted 12. I guess. You place.</span></div><form class="other" id="other"><input aria-label="Answer another way" placeholder="Name a new group"><button type="button" class="mic" aria-label="Speak your answer"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="7" y="2" width="6" height="10.5" rx="3"/><path d="M3.8 9.5a6.2 6.2 0 0 0 12.4 0M10 15.8V18"/></svg></button></form></footer><div class="home"></div></div><script>const DOCK_SAY="Make a new group called Gifts.";const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+function rec(t){const b=$('#rec'),e=$('#rec span');if(!e)return;e.textContent=t;b.classList.remove('flash');void b.offsetWidth;b.classList.add('flash')}
+function onDrag(el,h){el.addEventListener('pointerdown',ev=>{ev.preventDefault();el.setPointerCapture(ev.pointerId);h.start&&h.start(ev);const m=e=>h.move&&h.move(e),u=e=>{el.removeEventListener('pointermove',m);el.removeEventListener('pointerup',u);el.removeEventListener('pointercancel',u);h.end&&h.end(e)};el.addEventListener('pointermove',m);el.addEventListener('pointerup',u);el.addEventListener('pointercancel',u)})}
+(function(){const p=$('#phone');const fit=()=>{p.style.zoom=innerWidth<390?innerWidth/390:''};fit();addEventListener('resize',fit);const f=$('#other');if(!f)return;const i=$('input',f),m=$('.mic',f);f.addEventListener('submit',e=>{e.preventDefault();if(i.value.trim()){rec('Your own words: '+i.value.trim());i.value=''}});m.addEventListener('click',()=>{m.classList.add('on');const ph=i.placeholder;i.placeholder='Listening';setTimeout(()=>{m.classList.remove('on');i.placeholder=ph;i.value=DOCK_SAY},1200)})})();
+
+const bins=[{n:'Price',c:5},{n:'Trust',c:4},{n:'Shipping',c:3}];
+const notes=[['"Half my tomato seeds did not sprout. I want to know why."','June, email','Trust',1],['"The box came in two days. I was surprised."','May, review','Shipping',2],['"Why does a small pack cost so much?"','July, chat','Price',0],['"My neighbor sent me to you. She has bought for years."','April, email','Trust',1]];
+let i=0;const B=$('#b');
+bins.forEach((x,k)=>{x.el=document.createElement('button');x.el.className='bin';x.el.innerHTML='<div class="st"></div><h3>'+x.n+'</h3><em></em>';x.el.onclick=()=>place(k);B.append(x.el)});
+const nw=document.createElement('button');nw.className='bin new';nw.innerHTML='<b>+</b><span>New group</span>';nw.onclick=()=>$('#other input').focus();B.append(nw);
+function dr(){bins.forEach((x,k)=>{$('.st',x.el).innerHTML=Array.from({length:x.c},(_,j)=>`<i style="--r:${(j*37%7-3)*.7}"></i>`).join('');$('em',x.el).textContent=x.c+' notes';x.el.classList.toggle('g',notes[i%4][3]===k)})}
+function card(){const n=notes[i%4],s=document.createElement('div');s.className='slip';s.id='f';s.innerHTML=`<p>${n[0]}</p><footer><span>${n[1].toUpperCase()}</span><b>MY GUESS: ${n[2].toUpperCase()}</b></footer>`;$('#t').insertBefore(s,$('.skip'));dr()}
+function place(k){const f=$('#f');f.id='';const x=-130+k*87;f.style.transform=`translate(${x}px,300px) rotate(${(k-1)*8}deg) scale(.2)`;f.style.opacity=0;setTimeout(()=>f.remove(),400);const was=notes[i%4];if(k!==undefined){bins[k].c++;rec(`You put this note in ${bins[k].n}. My guess was ${was[2]}.`)}i++;card()}
+$('#sk').onclick=()=>{const f=$('#f');f.id='';f.style.opacity=0;setTimeout(()=>f.remove(),400);i++;card();rec('You skipped a note. It waits at the end.')};
+$('#sp').onclick=()=>rec('You marked this note for two groups.');
+card();
+</script></body></html>
