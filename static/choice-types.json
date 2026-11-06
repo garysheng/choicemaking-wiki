@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "types": [
+    {
+      "id": "say-what-you-want",
+      "name": "Say what you want",
+      "family": "frame",
+      "does": "Put your intent in your own words.",
+      "url": "https://choicemaking.wiki/patterns/say-what-you-want"
+    },
+    {
+      "id": "set-what-matters",
+      "name": "Set what matters",
+      "family": "frame",
+      "does": "Choose the criteria for good.",
+      "url": "https://choicemaking.wiki/patterns/set-what-matters"
+    },
+    {
+      "id": "pick-one",
+      "name": "Pick one",
+      "family": "select",
+      "does": "Choose one from a few.",
+      "url": "https://choicemaking.wiki/patterns/pick-one"
+    },
+    {
+      "id": "accept-or-reject",
+      "name": "Accept or reject",
+      "family": "select",
+      "does": "Say yes or no to each item, one or thousands.",
+      "url": "https://choicemaking.wiki/patterns/accept-or-reject"
+    },
+    {
+      "id": "rate",
+      "name": "Rate",
+      "family": "select",
+      "does": "Score an item on a scale.",
+      "url": "https://choicemaking.wiki/patterns/rate"
+    },
+    {
+      "id": "rank",
+      "name": "Rank",
+      "family": "select",
+      "does": "Put items in order of preference.",
+      "url": "https://choicemaking.wiki/patterns/rank"
+    },
+    {
+      "id": "sort",
+      "name": "Sort",
+      "family": "select",
+      "does": "Put items into groups or slots.",
+      "url": "https://choicemaking.wiki/patterns/sort"
+    },
+    {
+      "id": "split",
+      "name": "Split",
+      "family": "select",
+      "does": "Divide a fixed amount.",
+      "url": "https://choicemaking.wiki/patterns/split"
+    },
+    {
+      "id": "set-a-value",
+      "name": "Set a value",
+      "family": "select",
+      "does": "Choose a number on a range.",
+      "url": "https://choicemaking.wiki/patterns/set-a-value"
+    },
+    {
+      "id": "steer",
+      "name": "Steer",
+      "family": "shape",
+      "does": "Say \"more like this\" and go again.",
+      "url": "https://choicemaking.wiki/patterns/steer"
+    },
+    {
+      "id": "mark-up",
+      "name": "Mark up",
+      "family": "shape",
+      "does": "Say what to change, on the exact part.",
+      "url": "https://choicemaking.wiki/patterns/mark-up"
+    },
+    {
+      "id": "edit",
+      "name": "Edit",
+      "family": "shape",
+      "does": "Make the change yourself.",
+      "url": "https://choicemaking.wiki/patterns/edit"
+    },
+    {
+      "id": "combine",
+      "name": "Combine",
+      "family": "shape",
+      "does": "Take parts from several options.",
+      "url": "https://choicemaking.wiki/patterns/combine"
+    },
+    {
+      "id": "arrange",
+      "name": "Arrange",
+      "family": "shape",
+      "does": "Decide the order and structure.",
+      "url": "https://choicemaking.wiki/patterns/arrange"
+    },
+    {
+      "id": "set-a-rule",
+      "name": "Set a rule",
+      "family": "govern",
+      "does": "Decide once, for every future case.",
+      "url": "https://choicemaking.wiki/patterns/set-a-rule"
+    },
+    {
+      "id": "hand-off",
+      "name": "Hand off",
+      "family": "govern",
+      "does": "Give this choice to someone else.",
+      "url": "https://choicemaking.wiki/patterns/hand-off"
+    },
+    {
+      "id": "look-further",
+      "name": "Look further",
+      "family": "govern",
+      "does": "Refuse to decide yet, and get more.",
+      "url": "https://choicemaking.wiki/patterns/look-further"
+    },
+    {
+      "id": "stop",
+      "name": "Stop",
+      "family": "govern",
+      "does": "Halt what is running.",
+      "url": "https://choicemaking.wiki/patterns/stop"
+    }
+  ]
+}
