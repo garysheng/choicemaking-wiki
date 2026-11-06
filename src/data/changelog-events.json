@@ -1,6 +1,16 @@
 {
   "changeEvents": [
     {
+      "id": "reference/graphic-style@5c541c5e3f692abb4276b76381f7e41570457977",
+      "type": "updated",
+      "date": "2026-11-05T21:36:04-05:00",
+      "docKey": "reference/graphic-style",
+      "routePath": "/reference/graphic-style",
+      "section": "reference",
+      "title": "Graphic Style",
+      "description": "The visual register for every illustration on this wiki, and the one sanctioned command that produces them."
+    },
+    {
       "id": "concepts/sample-concept@145d0bc27137e3028bffc039fe495f1665a329df",
       "type": "removed",
       "date": "2026-11-05T21:34:59-05:00",
@@ -62,6 +72,14 @@
     }
   ],
   "pageDates": {
+    "reference/graphic-style": {
+      "updated": "2026-11-05T21:36:04-05:00",
+      "created": "2026-11-05T20:34:32-06:00"
+    },
+    "start-here/index": {
+      "updated": "2026-11-05T21:36:04-05:00",
+      "created": "2026-11-05T20:34:32-06:00"
+    },
     "reference/glossary": {
       "updated": "2026-11-05T21:34:59-05:00",
       "created": "2026-11-05T20:34:32-06:00"
@@ -74,10 +92,6 @@
       "updated": "2026-11-05T20:34:32-06:00",
       "created": "2026-11-05T20:34:32-06:00"
     },
-    "reference/graphic-style": {
-      "updated": "2026-11-05T20:34:32-06:00",
-      "created": "2026-11-05T20:34:32-06:00"
-    },
     "reference/index": {
       "updated": "2026-11-05T20:34:32-06:00",
       "created": "2026-11-05T20:34:32-06:00"
@@ -87,10 +101,6 @@
       "created": "2026-11-05T20:34:32-06:00"
     },
     "reference/voice-rules": {
-      "updated": "2026-11-05T20:34:32-06:00",
-      "created": "2026-11-05T20:34:32-06:00"
-    },
-    "start-here/index": {
       "updated": "2026-11-05T20:34:32-06:00",
       "created": "2026-11-05T20:34:32-06:00"
     }
