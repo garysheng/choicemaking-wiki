@@ -46,3 +46,16 @@ test('the committed file is what the pages say', () => {
 test('the list names no product', () => {
   assert.doesNotMatch(JSON.stringify(buildChoiceTypes(ROOT)), /supersuit|helm|pluma/i);
 });
+
+test('the consumer page gives the five steps as checkboxes, links real types and names no product', () => {
+  const page = readFileSync(new URL('docs/reference/use-these-choice-types.md', ROOT), 'utf8');
+  assert.equal(page.match(/^- \[ \] /gm)?.length, 5);
+  assert.match(page, /https:\/\/choicemaking\.wiki\/choice-types\.json/);
+  assert.match(page, /https:\/\/hypercontext\.wiki\/standards\/choice-type\/v1/);
+  assert.doesNotMatch(page, /supersuit|helm|pluma/i);
+  const ids = new Set(buildChoiceTypes(ROOT).types.map((t) => t.id));
+  const linked = [...page.matchAll(/\]\(\/patterns\/([a-z-]+)\)/g)].map((m) => m[1]).filter((id) => id !== 'prior-art');
+  assert.ok(linked.length > 0);
+  for (const id of linked) assert.ok(ids.has(id), `${id} is not a choice type`);
+  assert.match(readFileSync(new URL('sidebars.ts', ROOT), 'utf8'), /'reference\/use-these-choice-types'/);
+});
