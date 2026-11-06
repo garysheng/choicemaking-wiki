@@ -1,6 +1,196 @@
 {
   "changeEvents": [
     {
+      "id": "patterns/accept-or-reject@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/accept-or-reject",
+      "routePath": "/patterns/accept-or-reject",
+      "section": "patterns",
+      "title": "Accept or reject",
+      "description": "Say yes or no to each item, one or thousands. Example: Send this text, or 478 trip photos."
+    },
+    {
+      "id": "patterns/arrange@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/arrange",
+      "routePath": "/patterns/arrange",
+      "section": "patterns",
+      "title": "Arrange",
+      "description": "Decide the order and structure. Example: The order of an album."
+    },
+    {
+      "id": "patterns/combine@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/combine",
+      "routePath": "/patterns/combine",
+      "section": "patterns",
+      "title": "Combine",
+      "description": "Take parts from several options. Example: The verse from take 2 and the chorus from take 5."
+    },
+    {
+      "id": "patterns/edit@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/edit",
+      "routePath": "/patterns/edit",
+      "section": "patterns",
+      "title": "Edit",
+      "description": "Make the change yourself. Example: Rewrite the sentence."
+    },
+    {
+      "id": "patterns/hand-off@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/hand-off",
+      "routePath": "/patterns/hand-off",
+      "section": "patterns",
+      "title": "Hand off",
+      "description": "Give this choice to someone else. Example: Let the AI choose this one."
+    },
+    {
+      "id": "patterns/look-further@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/look-further",
+      "routePath": "/patterns/look-further",
+      "section": "patterns",
+      "title": "Look further",
+      "description": "Refuse to decide yet, and get more. Example: Order one more test."
+    },
+    {
+      "id": "patterns/mark-up@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/mark-up",
+      "routePath": "/patterns/mark-up",
+      "section": "patterns",
+      "title": "Mark up",
+      "description": "Say what to change, on the exact part. Example: Comments on a design doc."
+    },
+    {
+      "id": "patterns/pick-one@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/pick-one",
+      "routePath": "/patterns/pick-one",
+      "section": "patterns",
+      "title": "Pick one",
+      "description": "Choose one from a few. Example: A brand direction."
+    },
+    {
+      "id": "patterns/prior-art@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/prior-art",
+      "routePath": "/patterns/prior-art",
+      "section": "patterns",
+      "title": "Prior art and evidence",
+      "description": "What already exists, where it stops, and the evidence against this wiki's position."
+    },
+    {
+      "id": "patterns/rank@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/rank",
+      "routePath": "/patterns/rank",
+      "section": "patterns",
+      "title": "Rank",
+      "description": "Put items in order of preference. Example: What to build first."
+    },
+    {
+      "id": "patterns/rate@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/rate",
+      "routePath": "/patterns/rate",
+      "section": "patterns",
+      "title": "Rate",
+      "description": "Score an item on a scale. Example: Score a candidate on a rubric."
+    },
+    {
+      "id": "patterns/say-what-you-want@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/say-what-you-want",
+      "routePath": "/patterns/say-what-you-want",
+      "section": "patterns",
+      "title": "Say what you want",
+      "description": "Put your intent in your own words. Example: Brief a designer."
+    },
+    {
+      "id": "patterns/set-a-rule@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/set-a-rule",
+      "routePath": "/patterns/set-a-rule",
+      "section": "patterns",
+      "title": "Set a rule",
+      "description": "Decide once, for every future case. Example: Never use this color, or a spending cap."
+    },
+    {
+      "id": "patterns/set-a-value@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/set-a-value",
+      "routePath": "/patterns/set-a-value",
+      "section": "patterns",
+      "title": "Set a value",
+      "description": "Choose a number on a range. Example: A salary offer, or a dose."
+    },
+    {
+      "id": "patterns/set-what-matters@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/set-what-matters",
+      "routePath": "/patterns/set-what-matters",
+      "section": "patterns",
+      "title": "Set what matters",
+      "description": "Choose the criteria for good. Example: Trust matters more than novelty."
+    },
+    {
+      "id": "patterns/sort@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/sort",
+      "routePath": "/patterns/sort",
+      "section": "patterns",
+      "title": "Sort",
+      "description": "Put items into groups or slots. Example: Sort notes into themes."
+    },
+    {
+      "id": "patterns/split@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/split",
+      "routePath": "/patterns/split",
+      "section": "patterns",
+      "title": "Split",
+      "description": "Divide a fixed amount. Example: A budget across projects."
+    },
+    {
+      "id": "patterns/steer@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/steer",
+      "routePath": "/patterns/steer",
+      "section": "patterns",
+      "title": "Steer",
+      "description": "Say"
+    },
+    {
+      "id": "patterns/stop@2ccb64c026ccf067bdb94f16421f37bcd000bc81",
+      "type": "new",
+      "date": "2026-11-05T22:54:12-05:00",
+      "docKey": "patterns/stop",
+      "routePath": "/patterns/stop",
+      "section": "patterns",
+      "title": "Stop",
+      "description": "Halt what is running. Example: Stop an agent mid-task."
+    },
+    {
       "id": "philosophy/free-and-anointed-will@9517983f0b8503ce6398b3b269ca84a03043503e",
       "type": "new",
       "date": "2026-11-05T22:25:40-05:00",
@@ -132,6 +322,90 @@
     }
   ],
   "pageDates": {
+    "patterns/accept-or-reject": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/arrange": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/combine": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/edit": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/hand-off": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/index": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/look-further": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/mark-up": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/pick-one": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/prior-art": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/rank": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/rate": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/say-what-you-want": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/set-a-rule": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/set-a-value": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/set-what-matters": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/sort": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/split": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/steer": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "patterns/stop": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T22:54:12-05:00"
+    },
+    "start-here/index": {
+      "updated": "2026-11-05T22:54:12-05:00",
+      "created": "2026-11-05T20:34:32-06:00"
+    },
     "philosophy/free-and-anointed-will": {
       "updated": "2026-11-05T22:25:40-05:00",
       "created": "2026-11-05T22:25:40-05:00"
@@ -159,10 +433,6 @@
     "philosophy/what-co-made-means": {
       "updated": "2026-11-05T22:25:40-05:00",
       "created": "2026-11-05T22:25:40-05:00"
-    },
-    "start-here/index": {
-      "updated": "2026-11-05T22:25:40-05:00",
-      "created": "2026-11-05T20:34:32-06:00"
     },
     "reference/graphic-style": {
       "updated": "2026-11-05T21:36:04-05:00",

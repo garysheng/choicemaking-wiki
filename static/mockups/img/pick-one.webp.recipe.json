@@ -1,7 +1,7 @@
 {
   "asset": "static/mockups/img/pick-one.webp",
   "generator": "scripts/render-mockups.mjs",
-  "generatedAt": "2026-11-06T03:53:49.897Z",
+  "generatedAt": "2026-11-06T03:55:44.088Z",
   "params": {
     "source": "static/mockups/pick-one.html",
     "width": 390,

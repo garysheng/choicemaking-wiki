@@ -1,7 +1,7 @@
 {
   "asset": "static/mockups/img/accept-or-reject.webp",
   "generator": "scripts/render-mockups.mjs",
-  "generatedAt": "2026-11-06T03:53:45.832Z",
+  "generatedAt": "2026-11-06T03:55:19.450Z",
   "params": {
     "source": "static/mockups/accept-or-reject.html",
     "width": 390,

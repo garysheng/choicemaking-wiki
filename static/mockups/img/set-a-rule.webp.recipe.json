@@ -1,7 +1,7 @@
 {
   "asset": "static/mockups/img/set-a-rule.webp",
   "generator": "scripts/render-mockups.mjs",
-  "generatedAt": "2026-11-06T03:53:51.746Z",
+  "generatedAt": "2026-11-06T03:55:55.031Z",
   "params": {
     "source": "static/mockups/set-a-rule.html",
     "width": 390,

@@ -1,7 +1,7 @@
 {
   "asset": "static/mockups/img/rank.webp",
   "generator": "scripts/render-mockups.mjs",
-  "generatedAt": "2026-11-06T03:53:50.394Z",
+  "generatedAt": "2026-11-06T03:55:46.827Z",
   "params": {
     "source": "static/mockups/rank.html",
     "width": 390,
