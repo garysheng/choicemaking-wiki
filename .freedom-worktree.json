@@ -1,6 +1,0 @@
-{
-  "reason": "THIS IS THE TEMPLATE EVERY WIKI IS MINTED FROM, and several sessions edit it at once: a scaffold change lands here first and is then migrated into the live wikis, so two sessions working different migrations collide on one tree. A half-finished scaffold edit on main is also what the next `init-wiki.sh` run forks into a real repo. Work in a worktree and neither can happen.\n\nThis marker is the TEMPLATE'S, not the wiki's. `scripts/init-wiki.sh` deletes it from a freshly minted wiki, because a repo one person has ever touched is not a shared checkout, and a marker inherited on day one refuses the skill's own next step (\"commit once right after scaffolding\") and teaches the author to prefix everything with FREEDOM_WORKTREE_GATE=off. Reported by @brayantenesaca10-boop (ContinentalWorks/freedom#137). A wiki that BECOMES shared gets its own marker then, with its own reason.",
-  "afterEnterWorktree": "Nothing extra. Build and preview inside the worktree (`ln -s ../../../node_modules node_modules` to skip a fresh install), then land it.",
-  "allow": [],
-  "allowWhy": "Nothing is writable on main. Scaffold edits, docs and the init script are all exactly the contended writes this gate exists to move off the shared tree."
-}
