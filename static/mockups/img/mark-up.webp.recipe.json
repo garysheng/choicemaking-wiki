@@ -1,7 +1,7 @@
 {
   "asset": "static/mockups/img/mark-up.webp",
   "generator": "scripts/render-mockups.mjs",
-  "generatedAt": "2026-11-06T03:55:38.656Z",
+  "generatedAt": "2026-11-06T03:57:49.043Z",
   "params": {
     "source": "static/mockups/mark-up.html",
     "width": 390,

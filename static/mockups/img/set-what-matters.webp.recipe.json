@@ -1,7 +1,7 @@
 {
   "asset": "static/mockups/img/set-what-matters.webp",
   "generator": "scripts/render-mockups.mjs",
-  "generatedAt": "2026-11-06T03:56:00.510Z",
+  "generatedAt": "2026-11-06T03:58:10.734Z",
   "params": {
     "source": "static/mockups/set-what-matters.html",
     "width": 390,

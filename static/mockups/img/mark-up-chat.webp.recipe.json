@@ -1,7 +1,7 @@
 {
   "asset": "static/mockups/img/mark-up-chat.webp",
   "generator": "scripts/render-mockups.mjs",
-  "generatedAt": "2026-11-06T03:55:35.868Z",
+  "generatedAt": "2026-11-06T03:57:46.308Z",
   "params": {
     "source": "static/mockups/mark-up-chat.html",
     "width": 390,

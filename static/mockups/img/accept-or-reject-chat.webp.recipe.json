@@ -1,7 +1,7 @@
 {
   "asset": "static/mockups/img/accept-or-reject-chat.webp",
   "generator": "scripts/render-mockups.mjs",
-  "generatedAt": "2026-11-06T03:55:16.705Z",
+  "generatedAt": "2026-11-06T03:57:27.251Z",
   "params": {
     "source": "static/mockups/accept-or-reject-chat.html",
     "width": 390,

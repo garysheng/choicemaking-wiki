@@ -1,7 +1,7 @@
 {
   "asset": "static/mockups/img/combine.webp",
   "generator": "scripts/render-mockups.mjs",
-  "generatedAt": "2026-11-06T03:55:24.910Z",
+  "generatedAt": "2026-11-06T03:57:35.406Z",
   "params": {
     "source": "static/mockups/combine.html",
     "width": 390,
