@@ -17,5 +17,8 @@
     "spec": "illustrations/SPEC.md",
     "refs": [],
     "outputDir": "static/img/illustrations"
+  },
+  "gate": {
+    "type": "none"
   }
 }

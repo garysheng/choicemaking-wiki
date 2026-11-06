@@ -25,7 +25,6 @@ The register sentence of record lives in `wiki.config.json` under `hero_register
 Two rules every wiki's register carries:
 
 - **No named living or recent illustrators, ever.** Describe the tradition instead. Moderation blocks the names, and the wrapper refuses them before spending anything.
-- **No power-armor, arc-reactor, or HUD-visor vocabulary.** That is the SupersuitUp family's retired neo-comic look, deprecated in 2026-07 and now an explicit rejected pole. Prompting it renders the wrong wiki.
 
 ## Heroes are multipanel
 
