@@ -1,0 +1,5 @@
+{
+  "outputDirectory": "build",
+  "framework": "docusaurus-2",
+  "trailingSlash": false
+}

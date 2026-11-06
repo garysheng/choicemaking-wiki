@@ -1,0 +1,372 @@
+# wiki-template
+
+*Docusaurus 3 starter for opinionated reference wikis. The bones of every wiki in this ecosystem, extracted once so the next one ships in an hour.*
+
+---
+
+## Start here: the playbook
+
+The full end-to-end recipe for using this template — the audience-posture interview, integration layering, branding, and Vercel deploy — lives at:
+
+**[truthmanagement.wiki/playbooks/starting-your-own-wiki](https://www.truthmanagement.wiki/playbooks/starting-your-own-wiki)**
+
+If you are scaffolding a fresh wiki, run the GENERATE recipe at the bottom of that page ([the-generate-recipe anchor](https://www.truthmanagement.wiki/playbooks/starting-your-own-wiki#the-generate-recipe)) and follow its four phases. This README is the quick reference once you know the shape.
+
+---
+
+## What this is
+
+A GitHub template repo for spinning up a new Docusaurus reference wiki with the conventions already baked in:
+
+- **Page anatomy enforced.** Frontmatter, H1 + italic one-line definition, divider, named H2 sections, Further Reading. The sample docs in `docs/` demonstrate the shape.
+- **Per-wiki branding via `wiki.config.json`.** Title, tagline, URL, GitHub org/repo, noindex toggle. The Docusaurus config and prebuild scripts read from this single source of truth.
+- **Image weight gated.** `wiki check image-weight` runs in `prebuild` and fails the build on any illustration under `static/` that is not webp, is wider than 1536px, or exceeds 1 MB. Icons and share cards are exempt from the format rule on purpose (a favicon must stay `.ico`/`.png`, and several unfurl consumers still do not render webp). Its pair, `pnpm optimize:images`, converts in place and rewrites every reference in the same pass, because a rename without the rewrite is a broken image behind a green build. Reason it exists: an image model writes PNG, a gpt-image-2 PNG is 2-4 MB where the same picture as webp is 200-400 KB, and nothing about that looks wrong until a repo carries gigabytes of it. faithwalk.garysheng.com reached 2.1 GB and spent 2m18s of every 4m Vercel build cloning it.
+- **Graphics on every page, and one of the two ways is free.** A page ships either a rendered illustration (`illustrations/`, an image model, costs money, optional) or a code-drawn diagram (`diagrams/`, one node script, costs nothing, **the default**). The diagram kit draws in the wiki's own colours and fonts, writes SVG into `static/img/diagrams/`, and refuses at build time when a label does not fit its box. See `diagrams/README.md`.
+- **Search built in.** Custom MiniSearch plugin (Cmd+K / `/` trigger, in-memory index, no third-party service).
+- **Changelog built in.** Git-derived creation/update dates surface as a `<ChangelogWidget />` widget on the homepage and a full `/changelog` page. No frontmatter dates required.
+- **Per-page social share cards built in.** The package's og-image plugin runs post-build: every page whose head has no `og:image` (no frontmatter `image:` hero) gets a branded 1200x630 card rendered from its own title + description and injected into its head. A shared link to any page unfurls with page-specific art, never a generic site card. Pages with an `image:` hero keep the hero. Brand the cards via the optional `og` block in `wiki.config.json` (`bg`, `accent`, `text`, `muted`).
+- **Favicon and PWA icon set from one script.** `pnpm icons` (the package's `wiki icons`) draws a monogram from
+  the wiki title in the brand colours and writes every size at once, so a brand change reaches all of
+  them in one run. It also writes a 16x16 proof to `scripts/cache/favicon-16.png`, which is the only
+  size that decides whether a favicon works.
+- **Manifest written at build time.** The package's manifest plugin emits `manifest.webmanifest` from
+  `wiki.config.json` and declares only icons that exist, so it can never point at a 404. Note the
+  extension: `.webmanifest` is NOT `.json`, and every gate or allowlist keyed on file extension
+  misses it unless it is named. `middleware.ts` names it.
+- **Bot-blocked at the edge.** `middleware.ts` returns 403 for known LLM training and AI-search user agents.
+- **One-page shares out of a gated wiki.** On a wiki with a password gate, the copy-link button hands out `/s/<sig>/<route>`: one page, served chrome-less and scriptless from the mirror the package's share-view plugin builds, to a reader who has no password and needs none. Deterministic HMAC over the route, keyed by `WIKI_SHARE_SECRET` or `WIKI_GATE_SECRET`, minted by the edge at `/s/mint` for an authorized reader; revoke everything at once by rotating the secret. `pnpm share /route` prefers this link on a gated wiki (`--whole-wiki` for the `?key=` link that opens everything). On an open wiki the code is present and dormant.
+- **Noindex by default.** `robots.txt: Disallow: /` + `<meta name="robots" content="noindex, nofollow">`. Toggle via `wiki.config.json`.
+- **`llms.txt` + `llms-full.txt` at build time.** Auto-generated from your docs so well-behaved AI agents can read the wiki without crawling it.
+- **Page templates in `templates/`.** Copy-and-rename scaffolds for `concept.mdx`, `tool.mdx`, `playbook.mdx`, `case-study.mdx`.
+- **Hosted skills.** `static/skills/<name>/SKILL.md` is served openly at `/skills/<name>/SKILL.md` (the `skills/` path is excluded from the bot-block in `middleware.ts`) so agents can fetch and follow canonical skills as a single source of truth. See `static/skills/README.md`.
+- **Hosted generators.** `static/generators/<name>/GENERATE.md` is served openly at `/generators/<name>/GENERATE.md` (the `generators/` path is also excluded from the bot-block) so a playbook links its GENERATE recipe instead of embedding it. See `static/generators/README.md`.
+
+## The framework is a package (v2.0.0, 2026-09-13)
+
+Everything above arrives by dependency. `@supersuit/docusaurus-preset-wiki` carries the five
+plugins, every theme component and swizzle, the share layer, the framework CSS, the edge
+middleware and the build checks; this repo is the smallest instance of it. An instance owns
+`wiki.config.json`, `docs/`, `sidebars.ts`, `static/`, the brand tokens in `src/css/custom.css`,
+and three one-line files:
+
+```ts
+// docusaurus.config.ts
+import wiki from './wiki.config.json';
+import { defineWikiConfig } from '@supersuit/docusaurus-preset-wiki';
+export default defineWikiConfig(wiki);
+
+// middleware.ts (the gate comes from wiki.config.json; `config` is declared literally, see the file)
+import wiki from './wiki.config.json';
+import { createMiddlewareFromConfig } from '@supersuit/docusaurus-preset-wiki/middleware';
+export default createMiddlewareFromConfig(wiki);
+```
+
+```json
+// package.json
+"prebuild": "wiki check"
+```
+
+**A framework update is a version bump.** `pnpm up @supersuit/docusaurus-preset-wiki`, build,
+deploy. `pnpm outdated` is the checker. The package's `CHANGELOG.md` is the ledger; the
+`UPGRADE-LEDGER.md` here ends at v2.0.0 and stays as the record of how the fleet got here.
+
+**Per-wiki additions** go in `defineWikiConfig`'s second argument: `themeConfig` deep-merges
+onto the defaults (navbar items, footer links), any other key replaces its default.
+
+```ts
+export default defineWikiConfig(wiki, {
+  themeConfig: { navbar: { items: [{ to: '/listen', label: 'Listen' }] } },
+  plugins: ['./plugins/my-own-plugin'],
+});
+```
+
+**A gated wiki is a `gate` block in `wiki.config.json`**, never an edit to `middleware.ts`:
+
+```json
+"gate": { "type": "password" }            // the default: dark until WIKI_PASSWORD + WIKI_GATE_SECRET are set
+"gate": { "type": "password", "machinePaths": "gated" }   // a private wiki: .md/.txt/llms behind the door too
+"gate": { "type": "freedom-account" }     // for people running Freedom: Google sign-in through the portal
+"gate": { "type": "none" }                // never gated, whatever the project holds
+```
+
+`wiki gate set --password "<word>"` or `wiki gate set --type freedom-account --pass-secret "<the
+portal's>"` sets the deployment, redeploys and checks the live door; `wiki gate status` reads it
+back. The ordering that has to be right (bot-block 403, share layer, then the gate's refusal)
+lives in the package. A wiki with a gate of its own (an identity provider, a member list) hands
+the middleware its verdict instead:
+
+```ts
+import { createMiddleware, type GateVerdict } from '@supersuit/docusaurus-preset-wiki/middleware';
+async function gate(request: Request): Promise<GateVerdict> {
+  // { authorized: true } for a valid cookie; otherwise { authorized: false, response }
+  // where response is the login page (401) or, for a ?key= prefill, a 303 setting the cookie.
+}
+export default createMiddleware({ gate });
+// plus the matcher literal, declared in this file
+```
+
+**Overriding one component** is a Docusaurus swizzle: put `src/theme/<Component>/index.tsx` in
+the instance and it wins over the package's. `@theme-original/<Component>` inside it is the
+package's version. Never copy the template's old `plugins/*` or `src/components/*` back in: `wiki check owned-files` fails the
+build if a path the package owns reappears, because that is the fork this package exists to end.
+
+## How to use this template
+
+### 1. Create a new repo from the template
+
+On GitHub: click **Use this template** > **Create a new repository**. Pick your org and name.
+
+Or from the CLI:
+
+```bash
+gh repo create your-org/your-wiki --template SupersuitUp/wiki-template --private
+gh repo clone your-org/your-wiki
+cd your-wiki
+```
+
+### 2. Initialize
+
+```bash
+npm install
+npm run init
+```
+
+`npm run init` prompts for title, tagline, URL, GitHub org/repo, description, and noindex preference, then writes `wiki.config.json` and updates `package.json`.
+
+At the end of init, you'll be offered the **field-note-sharers** integration (default ON). Pick a section folder name (`mentors`, `people-to-follow`, `sources`, `field-note-sharers`, or custom) and the script scaffolds `docs/<section>/index.md` and prints a sidebar snippet for you to paste. To enable it later instead, run `npm run init:field-note-sharers` standalone. The canonical recipe lives at `supersuit-repos/curated-wiki-integrations/integrations/field-note-sharers/`; the templates inside `scripts/templates/field-note-sharers/` are an intentional copy so the template is self-contained at bootstrap time.
+
+### 3. Customize
+
+- **Brand colors:** edit `src/css/custom.css` (the `--ifm-color-primary-*` group).
+- **Favicon and social card:** replace `static/img/favicon.png` and `static/img/docusaurus-social-card.jpg`.
+- **Sidebar:** edit `sidebars.ts` as content grows. The template ships with three top-level categories (`Start Here`, `Concepts`, `Reference`).
+- **Voice rules:** edit `docs/reference/voice-rules.md` to encode your wiki's writing constraints.
+
+### 4. Run locally
+
+```bash
+npm start -- --port 4444
+```
+
+Opens at `http://localhost:4444`. Hot-reload on content changes.
+
+### 5. Deploy
+
+The repo ships with `vercel.json` and is ready for Vercel auto-deploy from `main`.
+
+```bash
+vercel link
+vercel --prod
+```
+
+## Repo layout
+
+```
+wiki.config.json           Per-wiki branding (single source of truth)
+wiki.config.schema.json    JSON schema for editor autocompletion
+docusaurus.config.ts       Reads wiki.config.json; rarely edited directly
+sidebars.ts                Sidebar structure; edited per wiki
+docs/                      Wiki content
+  start-here/              Entry point
+  concepts/                Flat A-Z lexicon
+  reference/               Tools, glossary, voice rules
+diagrams/
+  build.mjs                Code-drawn SVG diagrams: helpers, palette, icons, one worked sample
+  build.test.mjs           Its tests (`node --test diagrams/build.test.mjs`)
+  README.md                How to add one, and the style rules
+  preview/                 Gitignored 2x PNGs, for looking at before embedding
+templates/                 Copy-and-rename MDX scaffolds
+src/
+  css/custom.css           Brand TOKENS only (:root and dark-mode variables); layout comes from the package
+  data/changelog-events.json  Committed changelog snapshot (see Changelog below)
+scripts/
+  init-wiki.sh                    `npm run init` — interactive setup
+  init-field-note-sharers.sh      `npm run init:field-note-sharers` — scaffold the attribution section
+  image-exempt-cases.json         Per-wiki image-format exemptions read by `wiki check image-weight`
+  templates/
+    field-note-sharers/           Section-index + source-page templates (mirror of curated-wiki-integrations recipe)
+middleware.ts              One-line re-export of the package's edge middleware (open wiki)
+node_modules/@supersuit/docusaurus-preset-wiki/   search, changelog, og cards, manifest, share
+                           mirror, theme components, framework CSS, middleware, `wiki` CLI
+static/
+  img/                     Favicon, social card
+  img/diagrams/            Code-drawn SVGs, written by diagrams/build.mjs, committed
+  robots.txt               Disallow all (toggle by removing if noindex=false)
+```
+
+## Adding pages
+
+```bash
+cp templates/concept.mdx docs/concepts/my-new-term.md
+cp templates/tool.mdx docs/reference/tools/my-new-tool.md
+```
+
+Then edit the new file. The frontmatter and page anatomy are already in place.
+
+## Conventions enforced by this template
+
+- **One coined term = one concept page.** Never redefine a term in two places. Cross-link.
+- **Italic one-line definition under every H1.** Quotable, scannable.
+- **Further Reading at the bottom.** Internal links first, outside sources second.
+- **Absolute paths for cross-links.** `/concepts/term-name`, not relative paths.
+- **`onBrokenLinks: 'throw'`.** A broken cross-link fails the build.
+- **Every page ships with a graphic, and a page without one is not finished** (the pure reference pages, a glossary or a changelog, are the exception: a lookup page has no argument to draw). Two ways, and they are not equal. A **rendered illustration** (`illustrations/scripts/render-hero.sh`) costs money per image and is the right tool for a hero with people in it. A **code-drawn diagram** (`diagrams/build.mjs`) costs nothing, and it is the default, because most pages argue a STRUCTURE (parts, an order, a loop, a contrast) and a structure should be computed rather than painted. Reach for the diagram first. Draw what the page argues; decoration is not a graphic.
+- **Article hero = social-share image.** If a page embeds an image (hero comic, strip, illustration), also set `image: "<site-absolute path>"` in its frontmatter (e.g. `image: "/img/illustrations/<slug>.webp"`). Docusaurus renders it as the page's `og:image`/`twitter:image`. Add or update the field in the same edit as the hero embed. Docusaurus validates the file exists at build time, so never point it at a placeholder path.
+- **Every page title stands alone in an unfurl.** A pasted link renders an image, the page title and
+  the domain. It does NOT render `og:description` on iMessage, and Apple's parser DROPS everything
+  after the title delimiter, so `Start Here | Your Wiki` unfurls as the two words **"Start Here"**.
+  Nav labels are the worst offenders here, because they are written to be read next to their siblings
+  in a sidebar and mean nothing alone on a card. So write frontmatter `title` as a sentence that says
+  what the page is with no help from the site name and no repeat of the domain, and add
+  `sidebar_label` to keep the nav short. The markdown `# H1` is untouched by this: Docusaurus prefers
+  the file's own H1 for display, so the visible page does not change. `Admissions` becomes
+  `How students get into this school`; the sidebar still reads `Admissions`.
+- **If the wiki needs a disclaimer, it belongs in the homepage title.** An on-page banner ("these are
+  one person's ideas, not the organization's position") does not render in an unfurl. Anyone
+  forwarding the link shows a title, a domain and a picture. Put the attribution in the title, where
+  it cannot be stripped.
+- **Homepage is the Start Here landing.** The file at `docs/start-here/index.mdx` carries `slug: /` and is both the wiki's homepage AND the Start Here category landing in the sidebar. Do NOT create a separate `docs/index.mdx` for the homepage. A standalone root index lives outside every sidebar group, so the homepage renders without a sidebar. Keep the canonical pattern: one file, two roles.
+
+## Sharing a page: `pnpm share`
+
+**Never send a gated URL.** It arrives on somebody's phone at a moment they did not choose and
+asks them to stop and type. A door is not a degraded page; it is a different and worse thing.
+
+```bash
+pnpm share /concepts/some-page          # prints a link that opens, or refuses
+pnpm share /concepts/some-page --json   # {outcome, url, checked}
+```
+
+Three outcomes, and only two of them produce a link. `open` means the bare URL already works,
+so it is returned unchanged. `unlocked` means a `?key=` link was built AND verified. `blocked`
+exits 1, prints what a human has to supply, and gives you nothing to send.
+
+**It probes the live site rather than trusting configuration.** Whether a gate is on is a fact
+about right now, and a note about it is a memory of a check.
+
+Two things it knows that are easy to get wrong by hand:
+
+- **A cookie-setting 3xx is success.** The gated convention here is `?key=<pw>` sets the cookie
+  and redirects to the clean URL. `fetch` follows redirects with no cookie jar, lands back on
+  the gate, and reads 401. A tool built without this told its author a live password had been
+  rotated. A browser carries the cookie, so that redirect is the open case.
+- **It never appends a parameter to a URL that already opens**, which would put the password
+  into a link that did not need it.
+
+The password comes from `WIKI_PASSWORD` in the environment, else `.env.local` / `.env`, so run
+`vercel env pull` in the repo first. **A variable marked SENSITIVE on the Vercel project cannot
+be read at all**, by the CLI or the API, and the script says so rather than reporting the
+password as broken.
+
+A wiki whose gate uses a different parameter declares it once, in `wiki.config.json`:
+
+```json
+{ "gate": { "unlockParam": "password" } }
+```
+
+## AI-native illustration system (built in)
+
+Every wiki forked from this template ships with a locked illustration pipeline at `illustrations/`. The shape, per the [agentic-brand-os](https://www.appliedai.wiki/concepts/agentic-brand-os) discipline:
+
+- **`wiki.config.json` -> `hero_register`** — the operative settings. `register` is the one sentence that reaches the model; `mode` picks the engine.
+- **`illustrations/SPEC.md`** — the fuller visual identity for humans and agents. Lineage, composition law, banned vocabulary, opt-in recurring character.
+- **`illustrations/refs/`** — 2 to 4 blessed style images, all passed on every render so the look stays coherent across pages.
+- **`illustrations/scripts/render-hero.sh`** — the one door. Owns the register, the panel law and the no-text law, refuses banned vocabulary, converts to WebP, writes provenance next to the shipped asset, and refuses a render that came back as a plate.
+- **`illustrations/scripts/generate.py`** — the vendored OpenAI adapter. Self-contained: no ABU, no external skills folder, dependencies install themselves via `uv`.
+
+To use it, dry-run first (costs nothing), then render:
+
+```bash
+./illustrations/scripts/render-hero.sh --dry-run <slug> "<beat one>. <beat two>. <beat three>."
+./illustrations/scripts/render-hero.sh <slug> "<beat one>. <beat two>. <beat three>."
+```
+
+**A hero is a STRIP OF BEATS, 3 by default, not a single plate.** Write the scene as
+beats; one paragraph renders as one plate whatever the layout instruction says.
+
+The door prints the two lines to paste. Always `.webp` in MDX, never `.png`, and the alt
+text is the verbatim prompt because it is the prompt archive:
+
+```mdx
+![The exact scene prompt you passed, verbatim.](/img/illustrations/<slug>.webp)
+```
+
+**Fork-time setup.** After scaffolding a wiki from this template:
+
+1. Install `uv` and `cwebp` (`brew install webp`), and set `OPENAI_API_KEY` in your shell. Images are billed to your own OpenAI account.
+2. Write one sentence into `hero_register.register` in `wiki.config.json`, and edit `illustrations/SPEC.md` to match.
+3. Render 2 to 4 style references through the door and keep the ones you like in `illustrations/refs/`. That is enough; recurring characters are opt-in and most wikis should skip them.
+
+The discipline is the point: the door is the only sanctioned way to render a hero. Call the generator directly and the register drifts, provenance lands in the wrong place, and nothing checks that a strip came back.
+
+Run the free tests after any change to the pipeline:
+
+```bash
+uv run illustrations/scripts/tests/test_check_panels.py
+./illustrations/scripts/tests/test_render_hero.sh
+```
+
+See `illustrations/SPEC.md` and `illustrations/scripts/README.md` for the full discipline.
+
+## Code-drawn diagrams (built in, and the default graphic)
+
+Every wiki forked from this template ships with `diagrams/`: one node script that draws SVG
+diagrams from code. No image model, no API key, no cost, nothing to install.
+
+```bash
+node diagrams/build.mjs               # render every diagram
+node diagrams/build.mjs my-diagram    # render one
+node --test diagrams/build.test.mjs   # the kit's own tests
+```
+
+It writes `static/img/diagrams/<name>.svg`, which is what a page embeds:
+
+```md
+![One sentence saying what the diagram argues.](/img/diagrams/<name>.svg)
+```
+
+and a 2x `diagrams/preview/<name>.png`, which is gitignored and exists so a human or an agent
+can LOOK at the render before embedding it. Previews need `rsvg-convert`
+(`brew install librsvg`); without it the SVGs still render and the previews are skipped.
+
+Three things the kit gets right that a hand-rolled script gets wrong:
+
+- **It reads the wiki's own colours and fonts** from `src/css/custom.css`, and derives the soft
+  fills, hairlines and second colour from them, so a diagram looks like this wiki rather than
+  like whoever drew it. Override any of it with a `diagrams` block in `wiki.config.json`.
+- **It refuses.** Every label inside a box is measured against the space it has and the build
+  THROWS when it does not fit. Overflow is invisible to every other signal: the build is green,
+  the page renders, and the text hangs over the edge for every reader.
+- **SVG ships, PNG does not.** An SVG is a few KB and is exempt from `wiki check image-weight`,
+  which only gates rasters. A PNG in `static/` would fail that gate on format. Do NOT set a
+  page's frontmatter `image:` to a diagram SVG: several unfurl consumers do not render SVG, and
+  the og-image plugin already makes a branded card for any page without one.
+
+This is the other half of `wiki check ascii-diagrams`, which refuses a diagram typed out of
+dashes and pipes on the grounds that deterministic graphics belong in code. This is the code.
+Refusing something while shipping no alternative is how a rule gets bypassed.
+
+Full discipline, including the style rules and how to add one: `diagrams/README.md`.
+
+## Changelog (built in)
+
+Every wiki forked from this template ships with the `wiki-changelog` feature pre-wired:
+
+- **`/changelog`** is a full month-grouped log of every doc in the wiki, newest first. Lives at `docs/changelog.mdx` and pulls data from the `creation-date-plugin`.
+- **`<ChangelogWidget limit={8} />`** is embedded near the bottom of the homepage (`docs/start-here/index.mdx`). It surfaces the most recently created or updated docs as a compact list.
+- **Every article shows its own `Created` / `Updated` dates** under the H1, next to the copy-link button (the package's `PageDates`, injected by its `DocItem/Content` wrapper). Same event stream as `/changelog`, so a page and the log can never disagree. A page written once shows only `Created`.
+- Dates are derived from git history (first commit per file = creation, last commit = update; renames followed). No frontmatter `creation_date` field required.
+
+Do **not** turn on Docusaurus's own `showLastUpdateTime`. It reads git at build time, and the build host clones shallow — so it reports whenever the clone window happens to start, not when the page was actually touched. That is the entire reason this plugin exists.
+
+**Commit `src/data/changelog-events.json`.** Vercel's build container clones the repo shallow AND strips the git remote, so the build can neither see older history nor fetch it. `git fetch --unshallow` in a build command exits 0 having done nothing; earlier versions of this README told you to do exactly that, and it never worked. History has to ride along in the repo instead.
+
+So the plugin keeps a snapshot: on a full clone (your laptop) a build rewrites `src/data/changelog-events.json` from git, and on a shallow clone it leaves that file alone and merges it with whatever recent history it can see. Run a local build and commit the JSON when it changes, or production quietly shows only the last few weeks. Two related traps the plugin handles for you: paths from `git log --name-status` are repo-root-relative (so a site in a subdirectory needs its prefix stripped), and the commit where a shallow clone is cut off looks like a root commit, which would otherwise invent a "New" event for every file that merely existed at that point.
+
+**Section labels** in the changelog are derived from the folder slug (singularized, title-cased); acronyms that should not be title-cased (`faq`, `paos`) live in the package's `ChangelogWidget`. No per-wiki upkeep; a new acronym is a one-line change upstream.
+
+For the recipe in full, see `curated-wiki-integrations/integrations/wiki-changelog/INTEGRATE.md` in the parent `supersuit-repos/` workspace.
+
+## License
+
+Use it however you like. No attribution required.

@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/@supersuit/docusaurus-preset-wiki/wiki.config.schema.json",
+  "title": "Template Wiki",
+  "tagline": "A Docusaurus wiki starter",
+  "url": "https://example.com",
+  "organizationName": "your-org",
+  "projectName": "your-wiki",
+  "copyright": "Template Wiki",
+  "noindex": true,
+  "description": "Canonical reference for the topic this wiki covers.",
+  "intake_mode": "source-grounded",
+  "hero": {
+    "stylePack": "warm-editorial-titled",
+    "layout": "grid",
+    "beats": 4,
+    "size": "2560x1440",
+    "tier": "best",
+    "outputDir": "static/img/illustrations"
+  },
+  "hero_register": {
+    "mode": "local",
+    "layout": "multipanel",
+    "defaultPanels": 3,
+    "register": "",
+    "spec": "illustrations/SPEC.md",
+    "refs": [],
+    "outputDir": "static/img/illustrations"
+  }
+}

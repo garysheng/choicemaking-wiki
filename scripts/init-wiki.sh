@@ -1,0 +1,188 @@
+#!/usr/bin/env bash
+# Interactive scaffold for a new wiki built from this template.
+# Prompts for branding values, writes wiki.config.json, optionally updates package.json name.
+
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+CONFIG="$ROOT/wiki.config.json"
+PKG="$ROOT/package.json"
+
+echo ""
+echo "=== Wiki initialization ==="
+echo ""
+
+read -r -p "Wiki title (e.g. supersuit.wiki): " TITLE
+read -r -p "Tagline (one line): " TAGLINE
+read -r -p "Production URL (e.g. https://example.wiki): " URL
+read -r -p "GitHub org (e.g. SupersuitUp): " ORG
+read -r -p "GitHub repo name (e.g. my-wiki): " PROJECT
+read -r -p "Description (used in llms.txt header): " DESCRIPTION
+read -r -p "Visual register in one sentence (blank for the default cream editorial look): " HERO_REGISTER
+read -r -p "Block search engine indexing? [Y/n]: " NOINDEX_INPUT
+read -r -p "Intake mode [source-grounded/authored-canon] (default source-grounded): " INTAKE_MODE_INPUT
+
+# Default Y
+if [[ -z "$NOINDEX_INPUT" || "$NOINDEX_INPUT" =~ ^[Yy]$ ]]; then
+  NOINDEX="true"
+else
+  NOINDEX="false"
+fi
+
+# Intake mode: default source-grounded; anything starting with a/A means authored-canon
+if [[ "$INTAKE_MODE_INPUT" =~ ^[Aa] ]]; then
+  INTAKE_MODE="authored-canon"
+else
+  INTAKE_MODE="source-grounded"
+fi
+
+# The declared URL must serve 200 DIRECTLY, not via a redirect.
+#
+# Docusaurus turns this one value into every absolute URL the site emits:
+# og:image, og:url, the canonical link. If the apex 308s to www (or the
+# reverse), every one of those is a redirect, and scrapers differ on whether
+# they follow one. The ones that do not simply drop the image, so the share
+# card renders blank with nothing in the page source to explain why.
+#
+# Found on four wikis at once (2026-08-23): appliedai, agenticbusiness,
+# supersuit and truthmanagement all declared their apex while their apex
+# redirected to www. Every share card on all four was dropped by any scraper
+# that does not follow redirects, and every build was green the whole time.
+URL_CODE=$(curl -s -m 15 -o /dev/null -w '%{http_code}' "$URL/" 2>/dev/null || echo "000")
+case "$URL_CODE" in
+  30*)
+    REDIRECT_TARGET=$(curl -s -m 15 -o /dev/null -w '%{redirect_url}' "$URL/" 2>/dev/null)
+    echo ""
+    echo "  WARNING: $URL/ returns $URL_CODE and redirects to:"
+    echo "           $REDIRECT_TARGET"
+    echo "  Declare the host that serves 200 DIRECTLY, or every og:image this"
+    echo "  wiki emits will be a redirect and scrapers will drop the card."
+    echo ""
+    ;;
+esac
+
+# Footer copyright defaults to title
+COPYRIGHT="$TITLE"
+
+cat > "$CONFIG" << EOF
+{
+  "\$schema": "./node_modules/@supersuit/docusaurus-preset-wiki/wiki.config.schema.json",
+  "title": "$TITLE",
+  "tagline": "$TAGLINE",
+  "url": "$URL",
+  "organizationName": "$ORG",
+  "projectName": "$PROJECT",
+  "copyright": "$COPYRIGHT",
+  "noindex": $NOINDEX,
+  "description": "$DESCRIPTION",
+  "intake_mode": "$INTAKE_MODE",
+  "hero_register": {
+    "mode": "local",
+    "layout": "multipanel",
+    "defaultPanels": 3,
+    "register": "$HERO_REGISTER",
+    "spec": "illustrations/SPEC.md",
+    "refs": [],
+    "outputDir": "static/img/illustrations"
+  }
+}
+EOF
+
+# Update package.json name field
+if command -v node >/dev/null 2>&1; then
+  node -e "
+    const fs = require('fs');
+    const p = JSON.parse(fs.readFileSync('$PKG', 'utf8'));
+    p.name = '$PROJECT';
+    fs.writeFileSync('$PKG', JSON.stringify(p, null, 2) + '\n');
+  "
+fi
+
+echo ""
+echo "Wrote $CONFIG"
+echo "Updated $PKG (name -> $PROJECT)"
+echo ""
+
+# Optional integrations
+echo "=== Optional integrations ==="
+echo ""
+read -r -p "Enable the field-note-sharers attribution section (mentors / people-to-follow / etc.)? [Y/n]: " ENABLE_FNS
+if [[ -z "$ENABLE_FNS" || "$ENABLE_FNS" =~ ^[Yy]$ ]]; then
+  bash "$ROOT/scripts/init-field-note-sharers.sh"
+fi
+
+# Scaffold this wiki's personalized intake skill (hosted under static/skills/)
+echo ""
+echo "=== Intake skill ==="
+bash "$ROOT/scripts/init-intake-skill.sh"
+
+echo ""
+read -r -p "Register this wiki's hosted skills into your global registry now? [Y/n]: " REG_INPUT
+if [[ -z "$REG_INPUT" || "$REG_INPUT" =~ ^[Yy]$ ]]; then
+  bash "$ROOT/scripts/register-skills.sh"
+fi
+
+# --- diagrams: carried through to every wiki, with no question asked ---
+# A page without a graphic is not finished, and there are two ways to give it one: a rendered
+# illustration (illustrations/, an image model, costs money, optional) or a code-drawn diagram
+# (diagrams/, a node script, costs nothing, the DEFAULT). The kit is not an integration to
+# opt into, because the one thing it competes with is an author typing a picture out of dashes
+# and pipes, which `wiki check ascii-diagrams` already refuses. Refusing something while
+# shipping no alternative is how a rule gets bypassed.
+echo ""
+echo "=== Diagrams ==="
+if [ ! -f "$ROOT/diagrams/build.mjs" ]; then
+  echo "  ERROR: diagrams/build.mjs is missing from this template." >&2
+  echo "         Every wiki ships with the code-drawn diagram kit. Restore it before continuing." >&2
+  exit 1
+fi
+mkdir -p "$ROOT/static/img/diagrams"
+echo "  Code-drawn diagram kit present at diagrams/ (free, no image model, no API key)."
+echo "  Output goes to static/img/diagrams/<name>.svg; embed as ![alt](/img/diagrams/<name>.svg)."
+echo "  Add one: copy sampleFlow() in diagrams/build.mjs, register it, run 'node diagrams/build.mjs'."
+
+echo ""
+echo "=== Next steps ==="
+echo "  1. Edit src/css/custom.css to set brand colors (the --ifm-color-primary-* group)."
+echo "  2. Replace static/img/favicon.png and static/img/docusaurus-social-card.jpg."
+echo "  3. Replace docs/start-here/index.md with the canonical entry point for this wiki."
+echo "  4. If you enabled field-note-sharers, paste the sidebar snippet printed above into sidebars.ts."
+echo "  5. If you skipped registration above, run 'npm run register-skills' to wire the hosted skills into global discovery."
+echo "  6. Every page ships with a graphic: a rendered illustration (paid, optional) or a"
+echo "     code-drawn diagram (free, the default). See diagrams/README.md."
+echo "  7. Run 'npm install' then 'npm start' to preview."
+echo ""
+
+# --- sample content cleanup ---
+# The template ships docs/concepts/sample-concept.md AND a glossary row linking to
+# it. An author writing real concepts deletes the sample page and never thinks about
+# the glossary, so the row survives pointing at nothing. Two live wikis shipped that
+# exact dead link before check-links existed to catch it.
+#
+# Remove them together, here, so a fresh wiki never carries the pair.
+rm -f docs/concepts/sample-concept.md
+# Same reasoning for the sample DIAGRAM's rendered output: the kit stays, its worked example
+# stays in build.mjs as the thing to copy, and the stray SVG nothing embeds does not ship into
+# a real wiki. `node diagrams/build.mjs` redraws it in a second if you want to look at it.
+rm -f static/img/diagrams/sample-flow.svg static/img/diagrams/sample-flow.svg.recipe.json
+if [ -f docs/reference/glossary.md ]; then
+  sed -i '' '/concepts\/sample-concept/d' docs/reference/glossary.md 2>/dev/null \
+    || sed -i '/concepts\/sample-concept/d' docs/reference/glossary.md
+fi
+echo "Removed the sample concept and its glossary row."
+
+# --- the worktree marker belongs to THIS repo, never to the one it mints ---
+# `.freedom-worktree.json` says a checkout is SHARED and makes Freedom's gate refuse a commit
+# from its main tree. That is true of wiki-template itself, which several sessions edit at once,
+# and it is false of a wiki created a minute ago that one person has ever touched. The marker
+# rode along in the fork anyway, carrying a `reason` written about Freedom's own wiki checkout,
+# so the skill's next documented step ("commit once right after scaffolding") was refused in a
+# brand-new repo, and the workaround was to prefix every command with FREEDOM_WORKTREE_GATE=off.
+# Reported by @brayantenesaca10-boop (ContinentalWorks/freedom#137).
+#
+# A wiki BECOMES shared later, when a second session starts writing it. Adding the marker then
+# is one file; inheriting it on day one costs every author a refusal they have to learn to
+# bypass, which teaches them to bypass the gate everywhere.
+# The removal is COMMITTED, not just deleted: Freedom's gate reads the marker from HEAD when the
+# file is missing (freedom-dev#546). scripts/drop-worktree-marker.sh says why.
+bash "$(dirname "$0")/drop-worktree-marker.sh"
